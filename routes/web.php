@@ -18,3 +18,4 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* https://www.youtube.com/watch?v=tFr0Vg1q9Eg */
