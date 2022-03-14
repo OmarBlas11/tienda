@@ -7,52 +7,48 @@
 @stop
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <a class="btn btn-secondary" href="{{ route('admin.categories.create') }}">Agregar Nueva Categoria</a>
-        </div>
-        <div class="card-body table-responsive-sm">
-            <table class="table table-striped table-hover ">
-                <thead>
-                    <tr>
-                        <td>CODIGO</td>
-                        <td>NOMBRE</td>
-                        <td colspan="2">ACCIONES</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($categories as $category)
-                        <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->name }}</td>
-                            <td width="10px">
-                                <a href="{{ route('admin.categories.edit', $category) }}"
-                                    class="btn btn-primary btn-sm">Editar</a>
-                            </td>
-                            <td width="10px">
-                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer">
-
-        </div>
-    </div>
-    
+    @livewire('admin.category-index')
 @stop
 
 @section('css')
+@livewireStyles
 @stop
-
 @section('js')
+@livewireScripts
+{{-- <script>
+    const btneditar=document.querySelectorAll('#btneditar');
+    const idvalue = document.querySelectorAll('#idcat')
+    const namevalue = document.querySelectorAll('#namecat')
+    for (let index = 0; index < btneditar.length; index++) {
+        
+        btneditar[index].addEventListener("click", function (e) {
+            const nameInput = document.querySelector('#name');
+            const divcont = document.querySelector('#agregar');
+            const idvalor=idvalue[index].innerText;
+            const namevalor=namevalue[index].innerText;
+            divcont.innerHTML +='<input name="id" type="text" name="id" id="id" wire:model="idcat" value="'+idvalor+'">';
+            /* const crearElemento = document.createElement("input");
+            crearElemento.placerholer="Ingrear aqui";
+            crearElemento.id = "app";
+            crearElemento.value = idvalor;
+            crearElemento.name = "id";
+            crearElemento.type= "text";
+            crearElemento.type= "hidden";
+            crearElemento.= "id";
+             divcont.insertAdjacentElement("beforebegin", crearElemento); */
+             nameInput.value=namevalor;
+        });
+        
+    }
+</script> --}}
+{{-- <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
     <script>
-        var myModal = new bootstrap.Modal(document.getElementById('myModal'), options)
-    </script>
+        $(document).ready(function() {
+            $("#name").stringToSlug({
+                setEvents: 'keyup keydown blur',
+                getPut: '#slug',
+                space: '-'
+            });
+        });
+    </script> --}}
 @stop
