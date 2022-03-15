@@ -320,15 +320,22 @@ return [
         ], */
         ['header' => 'MANTENIMIENTO'],
         [
-            'text' => 'CATEGORIA',
+            'text' => 'CATEGORIAS',
             'route'  => 'admin.categories.index',
             'icon' => 'fas fa-list',
             'active' => ['admin/categories*'],
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'MESAS',
+            'route'  => 'admin.tables.index',
+            'icon' => 'fas fa-table',
+            'active' => ['admin/tables*'],
+        ],
+        [
+            'text' => 'PRODUCTOS',
+            'route'  => 'admin.products.index',
+            'icon' => 'fab fa-product-hunt fa-lg',
+            'active' => ['admin/products*'],
         ],
     ],
 

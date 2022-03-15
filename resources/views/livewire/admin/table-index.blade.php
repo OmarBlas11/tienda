@@ -6,11 +6,11 @@
         <div class="card-header">
             <a class="btn btn-secondary" data-toggle="modal" data-target="#ventana_create">Agregar
                 Nueva
-                Categoria</a>
+                Mesa</a>
 
         </div>
         <div class="card-body table-responsive-sm">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover ">
                 <thead>
                     <tr>
                         <td>CODIGO</td>
@@ -19,16 +19,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($tables as $table)
                         <tr>
-                            <td id="idcat">{{ $category->id }}</td>
-                            <td id="namecat">{{ $category->name }}</td>
+                            <td id="idcat">{{ $table->id }}</td>
+                            <td id="namecat">{{ $table->name }}</td>
                             <td width="10px">
-                                <a id="btneditar" wire:click="editar({{ $category->id }})" data-toggle="modal"
+                                <a id="btneditar" wire:click="editar({{ $table->id }})" data-toggle="modal"
                                     data-target="#ventana_edit" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td width="10px">
-                                <a id="btneDelete" wire:click="delete({{ $category->id }})"class="btn btn-danger btn-sm">Eliminar</a>
+                                <a id="btneDelete" wire:click="delete({{ $table->id }})"class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                         </tr>
                     @endforeach
@@ -42,7 +42,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center bg-center">Nueva Categoria</h5>
+                    <h5 class="modal-title text-center bg-center">Nueva Mesa</h5>
                     <a wire:click="cancel()" data-dismiss="modal" class="fas fa-times-circle" aria-label="Close"></a>
                     </button>
                 </div>

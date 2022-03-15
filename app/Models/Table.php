@@ -9,6 +9,8 @@ class Table extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'slug'];
+
     public function sale()
     {
         return $this->belongsToMany(Sale::class);

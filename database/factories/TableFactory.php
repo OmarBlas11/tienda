@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Table;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Table>
@@ -18,8 +19,10 @@ class TableFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->unique()->word(15);
         return [
-            'name' => $this->faker->word(15),
+            'name' => $name,
+            'slug' => Str::slug($name),
         ];
     }
 }
