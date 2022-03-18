@@ -11,6 +11,8 @@ class Sale extends Model
 {
     use HasFactory;
 
+    protected $fillable =['total', 'pago', 'vuelto'];
+
     public function product_sales()
     {
         return $this->hasMany(Product_Sale::class);

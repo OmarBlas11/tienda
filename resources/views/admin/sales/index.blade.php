@@ -12,8 +12,20 @@
 
 @section('css')
 @livewireStyles
+<style>
+    
+</style>
 @stop
 
 @section('js')
 @livewireScripts
+<script>
+    const nav=document.querySelector('.nav-link');
+    for (let index = 0; index < nav.length; index++) {
+        nav[index].addEventListener("click", function (e) {
+            this.classList
+        })
+        
+    }
+</script>
 @stop

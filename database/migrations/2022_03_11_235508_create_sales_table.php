@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->decimal('total', $precision=5, $scale=2)->nullable();
+            $table->decimal('pago', $precision=5, $scale=2)->nullable();
+            $table->decimal('vuelto', $precision=5, $scale=2)->nullable();
             $table->string('fecha_venta');
             $table->string('hora');
-            $table->string('mes');
+            $table->string('day');
+            $table->string('Month');
+            $table->string('year');
+            $table->string('semana');
             $table->unsignedBigInteger('table_id'); 
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
 
