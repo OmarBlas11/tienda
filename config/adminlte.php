@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -301,8 +300,8 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
-        ['header' => 'labels'],
+        ], */
+        /*  ['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -337,12 +336,31 @@ return [
             'icon' => 'fab fa-product-hunt fa-lg',
             'active' => ['admin/products*'],
         ],
+        ['header' => 'REALIZAR VENTA'],
+        [
+            'text' => 'VENDER',
+            'route'  => 'admin.ventas.index',
+            'icon' => 'fas fa-calculator',
+            'active' => ['admin/ventas*'],
+        ],
+        /* [
+            'text' => 'CATEGORIAS',
+            'route'  => 'admin.salecategories.index',
+            'icon' => 'fas fa-list',
+            'active' => ['admin/salecategories*'],
+        ], */
         ['header' => 'REPORTE DE VENTAS'],
         [
             'text' => 'VER REPORTE',
             'route'  => 'admin.sales.index',
             'icon' => 'fas fa-calculator',
             'active' => ['admin/sales*'],
+        ],
+        [
+            'text' => 'CATEGORIAS',
+            'route'  => 'admin.salecategories.index',
+            'icon' => 'fas fa-list',
+            'active' => ['admin/salecategories*'],
         ],
     ],
 
