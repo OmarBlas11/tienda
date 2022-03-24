@@ -11,7 +11,7 @@ class Sale extends Model
 {
     use HasFactory;
 
-    protected $fillable =['total', 'pago', 'vuelto'];
+    protected $fillable =['total', 'pago', 'vuelto','fecha_venta','hora','day','Month','year','semana','table_id'];
 
     public function product_sales()
     {

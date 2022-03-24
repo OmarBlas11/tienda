@@ -85,6 +85,8 @@
                     <th>Cantidad</th>
                     <th>Total</th>
                     <th>Ganancia</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
                     <th>Mesa</th>
                 </tr>
             </thead>
@@ -97,6 +99,8 @@
                         <td>{{ $product_sale->total }}</td>
                         <td>{{ $product_sale->total - $product_sale->product->precio_compra * $product_sale->cantidad }}
                         </td>
+                        <td>{{ $product_sale->sale->fecha_venta }}</td>
+                        <td>{{ $product_sale->sale->hora  }}</td>
                         <td>{{ $product_sale->sale->table->name }}</td>
                     </tr>
                 @endforeach

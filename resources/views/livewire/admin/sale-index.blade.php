@@ -24,11 +24,11 @@
                         </div>
                     </div>
                 </div>
-                @if (session()->has('llenado'))
+                {{-- @if (session()->has('llenado'))
                     <span class="text-primary text-center p-3 mb-2 bg-warning">{{ session('llenado') }}</span>
                 @endif
                 <a id="btneditar" wire:click="llenarsales()" data-toggle="modal" data-target="#ventana_edit"
-                    class="btn btn-primary btn-sm">Ver detalles</a>
+                    class="btn btn-primary btn-sm">Ver detalles</a> --}}
                 <div class="col">
                     <div class="input-group">
                         <div class="col">
@@ -72,33 +72,11 @@
                         <th scope="col">ACCIONES</th>
                     </tr>
                 </thead>
-                <tbody">
+                <tbody>
                     @foreach ($sales as $sale)
-                        <tr>
-                            <td>{{ $sale->id }}</td>
-                            <td>S/.{{ $sale->total }}</td>
-                            <td>S/.{{ $sale->pago }}</td>
-                            <td>S/.{{ $sale->vuelto }}</td>
-                            <td>
-                                <?php
-                                $subtotalganancia = 0;
-                                foreach ($product_sales as $produt_sale) {
-                                    if ($sale->id == $produt_sale->sale_id) {
-                                        $subtotalganancia += $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad;
-                                    }
-                                }
-                                echo 'S/.  ' . $subtotalganancia;
-                                ?>
-                            <td>{{ $sale->day }}-{{ $sale->Month }}-{{ $sale->year }}</td>
-                            <td>{{ $sale->hora }}</td>
-                            <td>{{ $sale->table->name }}</td>
-                            <td width>
-                                <a class="btn btn-primary select">detalles</a>
-                            </td>
-                        </tr>
-                        <td colspan="8" style="padding: 0;">
-                            <table>
-                                <thead class="details" style="background: wheat">
+                        <td colspan="10" style="padding: 0;">
+                            <table style="background-color: wheat">
+                                <thead class="details">
                                     <tr>
                                         <th>Sub.Total</th>
                                         <th>P.Venta</th>
@@ -108,15 +86,23 @@
                                         <th>Ganancia_Parcial</th>
                                     </tr>
                                 </thead>
-                                <tbody class="details_pro" style="background: wheat">
+                                <tbody class="details_pro">
                                     @foreach ($product_sales as $produt_sale)
                                         @if ($sale->id == $produt_sale->sale_id)
                                             <tr>
+                                                <td></td>
                                                 <td>{{ $produt_sale->total }}</td>
                                                 <td>{{ $produt_sale->product->precio_venta }}</td>
+                                                <td></td>
                                                 <td>{{ $produt_sale->product->precio_compra }}</td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>{{ $produt_sale->cantidad }}</td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>{{ $produt_sale->product->name }}</td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>{{ $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad }}
                                                 </td>
                                             </tr>
@@ -125,8 +111,31 @@
                                 </tbody>
                             </table>
                         </td>
+                        <tr>
+                            <td style="padding: 5px;">{{ $sale->id }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->total }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->pago }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->vuelto }}</td>
+                            <td style="padding: 5px;">
+                                <?php
+                                $subtotalganancia = 0;
+                                foreach ($product_sales as $produt_sale) {
+                                    if ($sale->id == $produt_sale->sale_id) {
+                                        $subtotalganancia += $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad;
+                                    }
+                                }
+                                echo 'S/.  ' . $subtotalganancia;
+                                ?>
+                            <td style="padding: 5px;">{{ $sale->day }}-{{ $sale->Month }}-{{ $sale->year }}
+                            </td>
+                            <td style="padding: 5px;">{{ $sale->hora }}</td>
+                            <td style="padding: 5px;">{{ $sale->table->name }}</td>
+                            <td style="padding: 5px;">
+                                <a class="btn btn-primary select">detalles</a>
+                            </td>
+                        </tr>
                     @endforeach
-                    </tbody>
+                </tbody>
             </table>
         </div>
         <div class="card-header table-responsive">
@@ -192,8 +201,10 @@
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php $total = 0; ?>
+                <tbody id="subtable">
+                    <?php $total = 0;
+                    $gasto = 0;
+                    $ganancia = 0; ?>
                     @foreach ($report_customizeds as $report_customizeds)
                         <tr>
                             <td>{{ $report_customizeds->id }}</td>
@@ -204,24 +215,77 @@
                             </td>
                             <td>{{ $report_customizeds->hora }}</td>
                             <td>{{ $report_customizeds->table->name }}</td>
-                            <td width>
-                                <a id="btneditar" wire:click="detalles({{ $report_customizeds->id }})"
-                                    data-toggle="modal" data-target="#ventana_edit" class="btn btn-primary btn-sm">Ver
-                                    detalles</a>
+                            <td style="padding: 5px;">
+                                <a class="btn btn-primary select_details">detalles</a>
                             </td>
                         </tr>
+                        <td colspan="10" style="padding: 0;">
+                            <table>
+                                <thead class="details_reportitle">
+                                    <tr>
+                                        <th>Sub.Total</th>
+                                        <th>P.Venta</th>
+                                        <th>P.Compra</th>
+                                        <th>Cantidad</th>
+                                        <th>Producto</th>
+                                        <th>Ganancia_Parcial</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="details_report">
+                                    @foreach ($product_sales as $produt_sale)
+                                        @if ($report_customizeds->id == $produt_sale->sale_id)
+                                            <tr></tr>
+                                            <tr>
+                                                <td>{{ $produt_sale->total }}</td>
+                                                <td></td>
+                                                <td>{{ $produt_sale->product->precio_venta }}</td>
+                                                <td></td>
+                                                <td>{{ $produt_sale->product->precio_compra }}</td>
+                                                <td></td>
+                                                <td>{{ $produt_sale->cantidad }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ $produt_sale->product->name }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad }}
+                                                </td>
+                                            </tr>
+                                            <?php $gasto += $produt_sale->product->precio_compra * $produt_sale->cantidad; ?>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </td>
                         <?php
                         $total = $total + $report_customizeds->total;
+                        $ganancia = $total - $gasto;
                         ?>
                     @endforeach
                     <tr>
                         <td>
-                            TOTAL
+                            TOTAL:
                         </td>
                         <td>
                             <?php
                             echo 'S/.  ' . $total;
                             ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            GASTO:
+                        </td>
+                        <td>
+                            {{ 'S/.  ' . $gasto }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            GANANCIAS:
+                        </td>
+                        <td>
+                            {{ 'S/.  ' . $ganancia }}
                         </td>
                     </tr>
                 </tbody>

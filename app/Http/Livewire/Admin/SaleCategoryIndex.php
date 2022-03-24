@@ -13,6 +13,7 @@ class SaleCategoryIndex extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $product_sales;
+    public $idcat;
     public function mount()
     {
         $this->product_sales=Product_Sale::all();
@@ -24,6 +25,7 @@ class SaleCategoryIndex extends Component
     }
     public function ShowForCategory($id)
     {
+        $this->idcat=$id;
 
         $products = Product::where('category_id', $id)->get();
 
@@ -31,10 +33,10 @@ class SaleCategoryIndex extends Component
             $this->product_sales = collect([]);
         }
         foreach ($products as $product) {
-            $product_sal =$this->product_sales->concat(Product_Sale::where('product_id', $product->id));
-            
-            $this->product_sales = $this->product_sales->concat($product_sal);
+            $product=Product_Sale::where('product_id', $product->id)->get();
+            $this->product_sales=$this->product_sales->concat( $product);
         }
+        
     }
     public function todas()
     {

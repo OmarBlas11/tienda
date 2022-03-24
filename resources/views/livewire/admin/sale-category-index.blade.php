@@ -15,4 +15,4 @@
             <a class="nav-link active">{{ $category->name }}</a>
         @endforeach
     </nav> --}}
-
+<div>
