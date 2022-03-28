@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Product_Sale;
 use App\Models\Sale;
 use App\Models\Table;
+use DateTime;
+use DateTimeZone;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -25,7 +27,9 @@ class SaleIndex extends Component
         /* $day = date("d");
         $mes = date("m");
         $anio = date("Y"); */
-        $this->date = date('Y-m-d');
+        $objectdate=new DateTime();
+        $objectdate->setTimezone(new DateTimeZone('America/Bogota'));
+        $this->date = $objectdate->format('Y-m-d');
     }
     public function updatingSearch()
     {
@@ -131,7 +135,7 @@ class SaleIndex extends Component
         if ($dia == '' || $mes == '' || $anio == '') {
             session()->flash('mensaje', 'Seleccione una fecha');
         } else {
-            $this->report = Sale::where('day', $dia)->where('Month', $namemes)->where('year', $anio)->get();
+            $this->report = Sale::where('day', $dia)->where('Month', $namemes)->where('year', $anio)->orderby('id','desc')->get();
             $this->Nombre = 'Repostes del: ' . $dia . ' de ' . $namemes . ' del ' . $anio;
             if ($this->report == '') {
                 session()->flash('mensaje', 'No hay registros de este dia');
@@ -149,7 +153,7 @@ class SaleIndex extends Component
             $this->report = [];
         } else {
             $weekend = date('W', mktime(0, 0, 0, $mes, $dia, $anio));
-            $this->report = Sale::where('semana', $weekend)->get();
+            $this->report = Sale::where('semana', $weekend)->orderby('id','desc')->get();
             if ($this->report == []) {
                 session()->flash('mensaje', 'No hay Registro de esta semana');
             }
@@ -204,7 +208,7 @@ class SaleIndex extends Component
             session()->flash('mensaje', 'Debe ingresar un fecha');
             $this->report = [];
         } else {
-            $this->report = Sale::where('Month', $namemes)->get();
+            $this->report = Sale::where('Month', $namemes)->orderby('id','desc')->get();
             if ($this->report == []) {
                 session()->flash('mensaje', 'No hay Registro de esta semana');
             }
@@ -220,7 +224,7 @@ class SaleIndex extends Component
             session()->flash('mensaje', 'Debe ingresar un fecha');
             $this->report = [];
         } else {
-            $this->report = Sale::where('year', $anio)->get();
+            $this->report = Sale::where('year', $anio)->orderby('id','desc')->get();
             if ($this->report == []) {
                 session()->flash('mensaje', 'No hay Registro de este año');
             }

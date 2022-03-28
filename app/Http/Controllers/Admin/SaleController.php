@@ -41,7 +41,6 @@ class SaleController extends Controller
      */
     public function store(StoreVentasRequest $request)
     {
-        /* dd($request->all()); */
         $stockactual=0;
         $id_product = $request->id_product;
         $cantidad_product = $request->cantidad_product;

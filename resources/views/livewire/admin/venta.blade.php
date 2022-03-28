@@ -1,9 +1,10 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            <input class="form-control" type="text" wire:model="search" placeholder="buscar producto">
+        <div class="card-header card-container-inputs" style="display: flex;">
+            <input class="form-control" style="margin-right: 20px;" type="text" wire:model="search" id="buscar" placeholder="buscar producto">
+            <input class="form-control" style="width: auto;" type="date" name="date" id="fechadate">
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table">
                 <thead>
                     <tr>
@@ -16,12 +17,12 @@
                 <tbody>
                     @foreach ($products as $product)
                         <tr>
-                            <td id="id" hidden>{{ $product->id }}</td>
-                            <td id="name">{{ $product->name }}</td>
-                            <td id="preci">{{ $product->precio_venta }}</td>
-                            <td id="stock">{{ $product->stock }}</td>
-                            <td>
-                                <a id="btnSelecionar" class="btn btn-primary">Seleccionar</a>
+                            <td style="padding: 5px;" id="id" hidden>{{ $product->id }}</td>
+                            <td style="padding: 5px;" id="name">{{ $product->name }}</td>
+                            <td style="padding: 5px;" id="preci">{{ $product->precio_venta }}</td>
+                            <td style="padding: 5px;" id="stock">{{ $product->stock }}</td>
+                            <td style="padding: 5px;">
+                                <span wire:ignore.self id="btnSelecionar" onClick="pasarvalores({{ $product->id; }} , '<?php echo $product->name ?>', <?php echo $product->precio_venta  ?>)" class="btn btn-primary">Seleccionar</span>
                             </td>
                         </tr>
                     @endforeach
@@ -42,8 +43,7 @@
                 </div>
             @endif
         </div>
-        <div wire:ignore class="card-body">
-            <form action=""></form>
+        <div wire:ignore class="card-body table-responsive">
             <form action="{{ route('admin.sales.store') }}" method="POST">
                 @csrf
                 <table class="table table-form">
@@ -57,6 +57,7 @@
                         </tr>
                     </thead>
                     <tbody id="llenar">
+
                     </tbody>
                     <tfoot>
                         <tr>
@@ -86,7 +87,7 @@
                             <td><input class="form-control" style="width: auto;" id="pago" type="number" step="any" name="pago"
                                     value=""></td>
                             <td>
-                                <a class="form-control btn-dark" style="cursor: pointer;"
+                                <a class="form-control btn-dark text-center" style="cursor: pointer;"
                                     onclick="calcular();">Calcular</a>
                             </td>
                         </tr>
@@ -96,10 +97,12 @@
                             <td>Vuelto</td>
                             <td><input class="form-control" style="width: auto;" step="any" id="vuelto" type="number"
                                     name="vuelto" readonly value=""></td>
+                            <td>
+                                <button id="btnVender" class="form-control btn btn-primary" disabled type="submit">Realizar venta</button>
+                            </td>
                         </tr>
                     </tfoot>
                 </table>
-                <button id="btnVender" class="btn btn-primary" disabled type="submit">Realizar venta</button>
             </form>
         </div>
     </div>

@@ -24,11 +24,11 @@
                         </div>
                     </div>
                 </div>
-                {{-- @if (session()->has('llenado'))
+                @if (session()->has('llenado'))
                     <span class="text-primary text-center p-3 mb-2 bg-warning">{{ session('llenado') }}</span>
                 @endif
                 <a id="btneditar" wire:click="llenarsales()" data-toggle="modal" data-target="#ventana_edit"
-                    class="btn btn-primary btn-sm">Ver detalles</a> --}}
+                    class="btn btn-primary btn-sm">Ver detalles</a>
                 <div class="col">
                     <div class="input-group">
                         <div class="col">
@@ -74,6 +74,30 @@
                 </thead>
                 <tbody>
                     @foreach ($sales as $sale)
+                        <tr>
+                            <td style="padding: 5px;">{{ $sale->id }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->total }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->pago }}</td>
+                            <td style="padding: 5px;">S/.{{ $sale->vuelto }}</td>
+                            <td style="padding: 5px;">
+                                <?php
+                                $subtotalganancia = 0;
+                                foreach ($product_sales as $produt_sale) {
+                                    if ($sale->id == $produt_sale->sale_id) {
+                                        $subtotalganancia += $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad;
+                                    }
+                                }
+                                echo 'S/.  ' . $subtotalganancia;
+                                ?>
+                            </td>
+                            <td style="padding: 5px;">{{ $sale->day }}-{{ $sale->Month }}-{{ $sale->year }}
+                            </td>
+                            <td style="padding: 5px;">{{ $sale->hora }}</td>
+                            <td style="padding: 5px;">{{ $sale->table->name }}</td>
+                            <td style="padding: 5px;">
+                                <a class="btn btn-primary select">detalles</a>
+                            </td>
+                        </tr>
                         <td colspan="10" style="padding: 0;">
                             <table style="background-color: wheat">
                                 <thead class="details">
@@ -111,29 +135,6 @@
                                 </tbody>
                             </table>
                         </td>
-                        <tr>
-                            <td style="padding: 5px;">{{ $sale->id }}</td>
-                            <td style="padding: 5px;">S/.{{ $sale->total }}</td>
-                            <td style="padding: 5px;">S/.{{ $sale->pago }}</td>
-                            <td style="padding: 5px;">S/.{{ $sale->vuelto }}</td>
-                            <td style="padding: 5px;">
-                                <?php
-                                $subtotalganancia = 0;
-                                foreach ($product_sales as $produt_sale) {
-                                    if ($sale->id == $produt_sale->sale_id) {
-                                        $subtotalganancia += $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad;
-                                    }
-                                }
-                                echo 'S/.  ' . $subtotalganancia;
-                                ?>
-                            <td style="padding: 5px;">{{ $sale->day }}-{{ $sale->Month }}-{{ $sale->year }}
-                            </td>
-                            <td style="padding: 5px;">{{ $sale->hora }}</td>
-                            <td style="padding: 5px;">{{ $sale->table->name }}</td>
-                            <td style="padding: 5px;">
-                                <a class="btn btn-primary select">detalles</a>
-                            </td>
-                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -15,7 +15,7 @@ class Venta extends Component
         $tables=Table::all();
         $products=[];
         if ($this->search) {
-            $products=Product::where('name','LIKE','%'.$this->search.'%')->paginate(3);
+            $products=Product::where('name','LIKE','%'.$this->search.'%')->orderby('name','ASC')->paginate(3);
         }
         return view('livewire.admin.venta',compact('products','tables'));
     }
