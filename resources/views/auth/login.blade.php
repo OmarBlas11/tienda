@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <img class="h-44" src="{{ Storage::url('/MeEncanta.png') }}" alt="">
+            </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

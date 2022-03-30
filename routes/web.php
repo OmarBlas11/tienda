@@ -22,5 +22,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 /* https://www.youtube.com/watch?v=tFr0Vg1q9Eg */
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('home');
+    return view('admin.ventas.index');
 })->name('dashboard');
