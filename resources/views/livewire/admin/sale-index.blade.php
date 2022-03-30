@@ -24,11 +24,11 @@
                         </div>
                     </div>
                 </div>
-                @if (session()->has('llenado'))
+                {{-- @if (session()->has('llenado'))
                     <span class="text-primary text-center p-3 mb-2 bg-warning">{{ session('llenado') }}</span>
                 @endif
                 <a id="btneditar" wire:click="llenarsales()" data-toggle="modal" data-target="#ventana_edit"
-                    class="btn btn-primary btn-sm">Ver detalles</a>
+                    class="btn btn-primary btn-sm">Ver detalles</a> --}}
                 <div class="col">
                     <div class="input-group">
                         <div class="col">
@@ -196,6 +196,7 @@
                         <th>TOTAL</th>
                         <th>PAGO</th>
                         <th>VUELTO</th>
+                        <th>GANANCIA</th>
                         <th>FECHA</th>
                         <th>HORA</th>
                         <th>MESA</th>
@@ -212,6 +213,17 @@
                             <td>S/.{{ $report_customizeds->total }}</td>
                             <td>S/.{{ $report_customizeds->pago }}</td>
                             <td>S/.{{ $report_customizeds->vuelto }}</td>
+                            <td>
+                                <?php
+                                $subtotalgananciareport = 0;
+                                foreach ($product_sales as $produt_sale) {
+                                    if ($report_customizeds->id == $produt_sale->sale_id) {
+                                        $subtotalgananciareport += $produt_sale->total - $produt_sale->product->precio_compra * $produt_sale->cantidad;
+                                    }
+                                }
+                                echo 'S/.  ' . $subtotalgananciareport;
+                                ?>
+                            </td>
                             <td>{{ $report_customizeds->day }}-{{ $report_customizeds->Month }}-{{ $report_customizeds->year }}
                             </td>
                             <td>{{ $report_customizeds->hora }}</td>

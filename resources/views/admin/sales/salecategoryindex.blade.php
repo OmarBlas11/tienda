@@ -42,6 +42,7 @@
         .menu_link:hover{
             background: #6c757d;
             color: white;
+            text-decoration: none;
         }
         .mostrar{
             margin-left: 0

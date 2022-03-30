@@ -45,7 +45,7 @@ return [
     */
 
     'logo' => '<b>Me</b>Encanta',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/MeEncanta.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -335,6 +335,24 @@ return [
             'route'  => 'admin.products.index',
             'icon' => 'fab fa-product-hunt fa-lg',
             'active' => ['admin/products*'],
+        ],
+        [
+            'text'    => 'Caja',
+            'icon'    => 'fas fa-cash-register',
+            'submenu' => [
+                [
+                    'text' => 'Abrir Caja',
+                    'route'  => 'admin.boxes.index',
+                ],
+                [
+                    'text' => 'Registrar Gastos',
+                    'route'  => 'admin.expenses.index',
+                ],
+                [
+                    'text' => 'Reporte de Caja',
+                    'route'  => 'admin.boxes.create',
+                ],
+            ]
         ],
         ['header' => 'REALIZAR VENTA'],
         [
